@@ -1,2 +1,1 @@
 Hubert Zawerbny
-Dodajmy komentarz
