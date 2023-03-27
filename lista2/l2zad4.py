@@ -27,3 +27,4 @@ def split_PDF(input_path, output_path, pages_per_file):
 
 if __name__ == "__main__":
     split_PDF("C:\\Users\\zawer\\Documents\\python1\\extras\\maly-ksiaze.pdf","C:\\Users\\zawer\\Documents\\python1\\extras\\nowy_ksiaze",13)
+    
