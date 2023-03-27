@@ -2,9 +2,17 @@ import zipfile
 import os
 import datetime
 
+def add_date(path):
+    """INSERT DOCSTRING"""
+    date = datetime.datetime.today().strftime('%Y-%m-%d')
+    path_list = path.split("\\")
+    path_list[-1] = date + "_" + path_list[-1]
+    date_path = "\\".join(path_list)
+    return date_path
+
 def zip_copy(input_path, output_path):
     """INSERT DOCSTRING"""
-    date = datetime.datetime.now().strftime("%x")
+    output_path = add_date(output_path)
     with zipfile.ZipFile(output_path+".zip", 'w') as zip:
         for file in input_path:
             main = os.walk(file)
