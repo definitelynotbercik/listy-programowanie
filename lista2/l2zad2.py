@@ -1,7 +1,23 @@
 from PIL import Image
 
 def img_min(input_path, new_size, output_path):
-    """INSERT DOCSTRING"""
+    """
+    Resize an image and save the resized image to a specified output path
+
+    ...
+
+    Input
+    ----------
+    input_path (str): The file path of the original image to be resized
+    new_size (tuple or list): The new size of the resized image, specified as a tuple or list of two integers representing the width and height, in pixels
+    output_path (str): The file path to save the resized image
+
+    Raises
+    ----------
+    FileNotFoundError: If the input or output path is invalid
+    TypeError: If the "new_size" argument is not a tuple or list of two integers
+    """
+    
     try:
         img = Image.open(input_path)
     except:

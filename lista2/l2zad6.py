@@ -1,7 +1,24 @@
 import re
 
 def column_add(operation:str):
-    """INSERT DOCSTRING"""
+    """
+    Return formatted column of addition or subtraction
+
+    ...
+
+    Input
+    ----------
+    operation (str): The mathematical operation to perform
+
+    Raises
+    ----------
+    TypeError: If given the given argument is not of type string
+
+    Output
+    ----------
+    column (str): The formatted column of the mathematical operation
+    """
+
     if type(operation) != str:
         raise TypeError("Given argument has to be of type string")
     
@@ -34,20 +51,29 @@ def column_add(operation:str):
 
 
 def column_multiply(operation:str):
+    """
+    Return formatted column of multiplication
+
+    ...
+
+    Input
+    ----------
+    operation (str): The mathematical operation to perform
+
+    Raises
+    ----------
+    TypeError: If given the given argument is not of type string
+
+    Output
+    ----------
+    column (str): The formatted column of the mathematical operation
+    """
+    
+    if type(operation) != str:
+        raise TypeError("Given argument has to be of type string")
+ 
     result = eval(operation)
     op_list = operation.split("*")
-
-    """
-    add_list = []
-    for i in range(len(op_list[1])-1, -1, -1):
-        carry = 0
-        for j in range(len(op_list[0])-1, -1, -1):
-            prod = int(op_list[1][i]) * int(op_list[0][j]) + carry
-            carry = prod//10
-            prod %= 10
-            add_list.append(prod)
-    add_list.append(carry)
-    """  
 
     len_list = []
     for i in range(len(op_list)):

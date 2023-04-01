@@ -1,7 +1,23 @@
 from PIL import Image, ImageEnhance
 
 def add_watermark(img_path, watermark_path, alpha=100):
-    """INSERT DOCSTRING"""
+    """
+    Add watermark to the image
+
+    ...
+
+    Input
+    ----------
+    img_path (str): The path of the image to add watermark to
+    watermark_path (str): The path to the watermark
+    alpha (int): The alpha value of the watermark, must be an integer in range 0-255 (default 100)
+
+    Raises
+    ----------
+    FileNotFoundError: If the provided image or watermark path does not exist
+    ValueError: If alpha is not an integer in range 0-255
+    """
+    
     try:
         img = Image.open(img_path)
     except:
