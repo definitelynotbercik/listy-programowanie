@@ -62,7 +62,8 @@ def column_multiply(operation:str):
 
     Raises
     ----------
-    TypeError: If given the given argument is not of type string
+    TypeError: If given the given argument is not of type string or numbers to multiply are not integers
+    NotImplementedError: If multiplication on more than 2 numbers is performed
 
     Output
     ----------
@@ -74,6 +75,15 @@ def column_multiply(operation:str):
  
     result = eval(operation)
     op_list = operation.split("*")
+
+    if len(op_list) > 2:
+        raise NotImplementedError("Function can multiply only 2 integers")
+    
+    try:
+        int(op_list[0])
+        int(op_list[1])
+    except:
+        raise TypeError("Function can multiply only integers")
 
     add_list = []
     complete_add_list = []
@@ -126,4 +136,4 @@ def column_multiply(operation:str):
 if __name__ == "__main__":
     print(column_add("5+5-300+5-300-800-5+8"))
     print("/////////////////////////")
-    print(column_multiply("100*500"))
+    print(column_multiply("1345*342"))
