@@ -55,7 +55,7 @@ def backup_copy(input_path:list, output_path:str, extensions:list=[], max_mod_ti
                     if (path != output_path and
                         (path_ext in extensions or extensions == []) and
                         sec_max_mod_time >= date_diff):
-                        #zip.write(path)
+                        zip.write(path)
                         print(f"Saved {path}")
 
 
