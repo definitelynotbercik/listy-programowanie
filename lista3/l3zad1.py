@@ -28,7 +28,7 @@ def add_folder_and_date(path:str) -> str:
 def backup_copy(input_path:list, output_path:str, extensions:list=[], max_mod_time=10):
     """INSERT DOCSTRING"""
     
-    if type(extensions) != list or type(extensions) != str:
+    if type(extensions) != list and type(extensions) != str:
         raise TypeError("Given extensions have to be of type list or string")
     
     if type(extensions) == list:
@@ -60,4 +60,4 @@ def backup_copy(input_path:list, output_path:str, extensions:list=[], max_mod_ti
 
 
 if __name__ == "__main__":
-    backup_copy(["C:\\Users\\zawer\\Documents\\python1\\extras"], "C:\\Users\\zawer\\Documents\\python1\\extras", "jpg,txt", 30)
+    backup_copy(["C:\\Users\\zawer\\Documents\\python1\\extras"], "C:\\Users\\zawer\\Documents\\python1\\extras", "jpg,txt")
