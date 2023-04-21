@@ -25,8 +25,23 @@ def add_folder_and_date(path:str) -> str:
     return new_path
 
 
-def backup_copy(input_path:list, output_path:str, extensions:list=[], max_mod_time=10):
-    """INSERT DOCSTRING"""
+def backup_copy(input_path:list, output_path:str, extensions:list=[], max_mod_time:int=10) -> None:
+    """
+    Create a backup copy of given files
+
+    ...
+
+    Input
+    ----------
+    input_path (str): A list of file paths that need to be backed up
+    output_path (str): A string that represents the output path and filename of the compressed backup file
+    extensions (list): A list of file extensions that need to be backed up. If this parameter is left blank (i.e., []), all files will be backed up
+    max_mod_time (int): An integer that represents the maximum modification time (in days) of the files that should be backed up
+
+    Raises
+    ----------
+    TypeError: If 'extensions' is not a list or string, if any item in 'extensions' is not a string, or if 'max_mod_time' is not a positive integer
+    """
     
     if type(extensions) != list and type(extensions) != str:
         raise TypeError("Given extensions have to be of type list or string")

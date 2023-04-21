@@ -3,8 +3,27 @@ import requests
 import webbrowser
 import re
 
-def find_wiki_article(loops = 5):
-    """INSERT DOCSTRING"""
+def find_wiki_article(loops:int=5) -> None:
+    """
+    Finds and opens a random article from Wikipedia
+
+    ...
+
+    Input
+    ----------
+    loops (int): The number of attempts to find a random article (5 by deafult)
+
+    Raises
+    ----------
+    TypeError: If 'loops' is not an integer
+    ValueError: If 'loops' is less than 1
+    """
+
+    if type(loops) != int:
+        raise TypeError("Loops type has to integer")
+    
+    if loops < 1:
+        raise ValueError("Loops has to be equal or greater than 1")
 
     url = "https://en.wikipedia.org/wiki/Special:Random"
 
