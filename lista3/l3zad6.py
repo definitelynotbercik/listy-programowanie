@@ -43,7 +43,8 @@ def find_wiki_article(loops:int=5) -> None:
 
         if response == "y":
             webbrowser.open(art_url)
-            response = input("Do you want to terminate the programm? (y/n)")
+            if _ < loops-1: 
+                response = input("Do you want to terminate the programm? (y/n)")
             if response == "y":
                 break
             else:
