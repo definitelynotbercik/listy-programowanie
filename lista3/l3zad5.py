@@ -1,34 +1,34 @@
-def paranthesis_check(equation):
+def bracket_check(equation):
     """INSERT DOCSTRING"""
 
-    par_list = []
+    bracket_list = []
     for char in equation:
         if char in ["(",")","[","]","{","}","<",">"]:
-            par_list.append(char)
-    if len(par_list)%2 != 0:
+            bracket_list.append(char)
+    if len(bracket_list)%2 != 0:
         return False
 
-    for i, par  in enumerate(par_list):
-        if i+1 > len(par_list)/2:
+    for i, par  in enumerate(bracket_list):
+        if i+1 > len(bracket_list)/2:
             break
-        elif par_list[i] == par_list[i+1]:
+        elif bracket_list[i] == bracket_list[i+1]:
             return False
         elif par == "(":
-            if par_list[-i-1] != ")":
+            if bracket_list[-i-1] != ")":
                 return False
         elif par == "[":
-            if par_list[-i-1] != "]":
+            if bracket_list[-i-1] != "]":
                 return False
         elif par == "{":
-            if par_list[-i-1] != "}":
+            if bracket_list[-i-1] != "}":
                 return False
         elif par == "<":
-            if par_list[-i-1] != ">":
+            if bracket_list[-i-1] != ">":
                 return False
 
     return True
 
 
 if __name__ == "__main__":
-    print(paranthesis_check("2[(3+5)-8]"))
+    print(bracket_check("3*[*2(3+5)]"))
     
