@@ -69,3 +69,4 @@ if __name__ == "__main__":
     make_random_graph()
     make_watts_strogatz_graph()
     make_barabasi_albert_graph()
+    

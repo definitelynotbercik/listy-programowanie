@@ -50,3 +50,4 @@ if __name__ == "__main__":
     gamma = args.gamma
 
     seir(N, S0, E0, I0, R0, beta, sigma, gamma)
+    
