@@ -5,6 +5,8 @@ import argparse
 
 
 def seir(N, S0, E0, I0, R0, beta, sigma, gamma):
+    N = S0 + E0 + I0 + R0
+
     def dydt(y, t):
         S, E, I, R = y
         return [-beta*S*I/N,
