@@ -25,7 +25,8 @@ def seir(N, S0, E0, I0, R0, beta, sigma, gamma):
     plt.xlabel("time")
     plt.ylabel("people")
     plt.legend(["Susceptible","Exposed","Infective","Recovered"])
-    plt.show()
+    plt.title(f"N={N}, S0={S0}, E0={E0}, I0={I0}, R0={R0}, beta={beta}, sigma={sigma}, gamma={gamma}", fontsize=10)
+    plt.savefig("C:\\Users\\zawer\\Documents\\python1\\semestr2\\lista4\\SEIR_models\\SEIR_model4.png")
 
 
 if __name__ == "__main__":
