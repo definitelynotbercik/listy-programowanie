@@ -6,6 +6,15 @@ import os
 
 
 def agent_walk(agent_position, steps, graph):
+    """
+    Simulates a random walk of an agent on a graph and saves visualizations of the graph at each step.
+
+    Args:
+    - agent_position: The starting node of the agent.
+    - steps: The number of steps in the random walk.
+    - graph: A NetworkX graph object.
+    """
+
     for i in range(steps):
         nb = list(nx.neighbors(graph, agent_position))
         if nb == []:
@@ -22,6 +31,14 @@ def agent_walk(agent_position, steps, graph):
 
 
 def make_gif(gif_folder, gif_name):
+    """
+    Converts the images saved in a folder to an animated gif and saves it.
+
+    Args:
+    - gif_folder: The folder containing the images to be converted.
+    - gif_name: The name of the gif file to be saved.
+    """
+
     im_to_gif = len(os.listdir(gif_folder))
     frames = []
     for i in range(im_to_gif):
@@ -34,11 +51,23 @@ def make_gif(gif_folder, gif_name):
     
 
 def clear_directory(directory):
+    """
+    Deletes all files in the specified directory.
+
+    Args:
+    - directory: The path of the directory to be cleared.
+    """
+
     for file in os.listdir(directory):
         os.remove(os.path.join(directory, file))
 
 
 def make_random_graph():
+    """
+    Creates a random graph using NetworkX, simulates a random walk of an agent on the graph, saves visualizations of the graph
+    at each step, and generates an animated gif of the visualizations.
+    """
+
     G = nx.gnp_random_graph(6, 0.4)
     agent_position = random.choice(list(nx.nodes(G)))
 
@@ -48,6 +77,11 @@ def make_random_graph():
 
 
 def make_watts_strogatz_graph():
+    """
+    Creates a Watts-Strogatz graph using NetworkX, simulates a random walk of an agent on the graph, saves visualizations of the graph
+    at each step, and generates an animated gif of the visualizations.
+    """
+
     G = nx.watts_strogatz_graph(6, 2, 0.3)
     agent_position = random.choice(list(nx.nodes(G)))
 
@@ -57,6 +91,11 @@ def make_watts_strogatz_graph():
 
 
 def make_barabasi_albert_graph():
+    """
+    Creates a Barabasi-Albert graph using NetworkX, simulates a random walk of an agent on the graph, saves visualizations of the graph
+    at each step, and generates an animated gif of the visualizations.
+    """
+
     G = nx.barabasi_albert_graph(6, 2)
     agent_position = random.choice(list(nx.nodes(G)))
 
