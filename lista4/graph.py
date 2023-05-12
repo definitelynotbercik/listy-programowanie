@@ -44,7 +44,7 @@ def make_gif(gif_folder, gif_name):
     for i in range(im_to_gif):
         image = iio.v3.imread(f"C:\\Users\\zawer\\Documents\\python1\\extras\\graph_images\\agent_walk{i}.jpg")
         frames.append(image)
-    iio.mimsave(f"C:\\Users\\zawer\\Documents\\python1\\extras\\{gif_name}.gif",
+    iio.mimsave(f"C:\\Users\\zawer\\Documents\\python1\\semestr2\\lista4\\graphs\\{gif_name}.gif",
                 frames,
                 duration=1000,
                 loop=0)
