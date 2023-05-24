@@ -96,7 +96,7 @@ def make_barabasi_albert_graph():
     at each step, and generates an animated gif of the visualizations.
     """
 
-    G = nx.barabasi_albert_graph(6, 2)
+    G = nx.barabasi_albert_graph(10, 2, initial_graph=nx.complete_graph(5))
     agent_position = random.choice(list(nx.nodes(G)))
 
     agent_walk(agent_position, 10, G)
