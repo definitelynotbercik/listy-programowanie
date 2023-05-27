@@ -123,10 +123,11 @@ class CC():
     
     def on_closing(self):
         """Handle the closing of the application window."""
-        
+
         if messagebox.askyesno(title="Wyjść?", message="Czy na pewno chcesz wyjść?"):
             self.root.destroy()
 
 
 if __name__ == "__main__":
     CC()
+    
