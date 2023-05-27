@@ -17,6 +17,7 @@ class CC():
 
         try:
             self.data = json.loads(requests.get("http://api.nbp.pl/api/exchangerates/tables/a/").text)[0]["rates"]
+            self.data.append({"currency":"złoty", "code":"PLN", "mid":1})
             self.save_currency_table()
         except:
             if not os.path.exists(self.file_path):
