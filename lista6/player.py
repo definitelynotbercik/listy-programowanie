@@ -1,5 +1,6 @@
 import pygame
 from supp import import_folder
+from math import sin
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, position):
@@ -12,6 +13,10 @@ class Player(pygame.sprite.Sprite):
         self.image = self.animations["idle"][self.frame_index]
         self.rect = self.image.get_rect(topleft = position)
         self.score = 0
+        self.health = 3
+        self.invincible = False
+        self.invincibility_duration = 500
+        self.hurt_time = 0
         
         #Movement
         self.movement_direction = pygame.math.Vector2(0,0)
@@ -105,10 +110,38 @@ class Player(pygame.sprite.Sprite):
             self.rect = self.image.get_rect(midtop = self.rect.midtop)
 
 
+    def get_damaged(self):
+        if not self.invincible:
+            self.health -= 1
+            self.invincible = True
+            self.hurt_time = pygame.time.get_ticks()
+
+    
+    def invincibility_timer(self):
+        if self.invincible:
+            current_time = pygame.time.get_ticks()
+            if current_time - self.hurt_time >= self.invincibility_duration:
+                self.invincible = False
+
+    
+    def show_invincibility(self):
+        value = sin(pygame.time.get_ticks())
+        if self.invincible:
+            if value > 0:
+                self.image.set_alpha(0)
+            else:
+                self.image.set_alpha(255)
+        else:
+            self.image.set_alpha(255)
+
+
     def get_score(self):
         return self.score
+
 
     def update(self):
         self.get_input()
         self.get_status()
         self.animation()
+        self.invincibility_timer()
+        self.show_invincibility()

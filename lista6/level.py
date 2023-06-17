@@ -1,9 +1,12 @@
 import pygame
 from tiles import Tile
+from barrier import Barrier
 from coins import Coin
 from settings import tile_size, coin_size, WIDTH
 from player import Player
 from enemy import Enemy
+from explosion import Explosion
+from goal import Goal
 
 
 class Level():
@@ -19,9 +22,12 @@ class Level():
     def setup_level(self, layout):
         #Groups
         self.tiles = pygame.sprite.Group()
+        self.barriers = pygame.sprite.Group()
         self.coins = pygame.sprite.Group()
-        self.enemy = pygame.sprite.Group()
+        self.goal = pygame.sprite.GroupSingle()
+        self.enemies = pygame.sprite.Group()
         self.player = pygame.sprite.GroupSingle()
+        self.explosion_sprites = pygame.sprite.Group()
 
         #Creating map and player
         for row_index, row in enumerate(layout):
@@ -30,6 +36,8 @@ class Level():
                 y = row_index * tile_size
                 x_coin = x + 25
                 y_coin = y + 25
+                x_key = x + 20
+                y_key = y + 20
                 x_enemy = x
                 y_enemy = y + 35
                 if cell == "X":
@@ -38,12 +46,18 @@ class Level():
                 if cell == "G":
                     tile = Tile((x,y), tile_size, "grass")
                     self.tiles.add(tile)
+                if cell == "B":
+                    tile = Barrier((x,y), tile_size)
+                    self.barriers.add(tile)
                 if cell == "C":
                     tile = Coin((x_coin, y_coin), coin_size)
                     self.coins.add(tile)
                 if cell == "E":
                     tile = Enemy((x_enemy, y_enemy))
-                    self.enemy.add(tile)
+                    self.enemies.add(tile)
+                if cell == "K":
+                    tile = Goal((x_key,y_key), coin_size)
+                    self.goal.add(tile)
                 if cell == "P":
                     player_sprite = Player((x,y))
                     self.player.add(player_sprite)
@@ -105,6 +119,7 @@ class Level():
         if player.on_ceiling and player.movement_direction.y > 0:
             player.on_ceiling = False
 
+
     def coin_collision(self):
         player = self.player.sprite
 
@@ -113,19 +128,68 @@ class Level():
                 player.score += 1
                 sprite.kill()
 
+    
+    def goal_collision(self):
+        player = self.player.sprite
+        goal = self.goal.sprite
+
+        if goal.rect.colliderect(player.rect):
+            return True
+
+
+    def enemy_collision(self):
+        enemy_collisions = pygame.sprite.spritecollide(self.player.sprite, self.enemies, False)
+
+        if enemy_collisions:
+            for enemy in enemy_collisions:
+                enemy_center = enemy.rect.centery
+                enemy_top = enemy.rect.top
+                player_bottom = self.player.sprite.rect.bottom
+                if enemy_top < player_bottom < enemy_center and self.player.sprite.movement_direction.y >= 0:
+                    self.player.sprite.movement_direction.y = self.player.sprite.jump_speed
+                    explosion_sprite = Explosion(enemy.rect.center)
+                    self.explosion_sprites.add(explosion_sprite)
+                    enemy.kill()
+                    self.player.sprite.score += 3
+                else:
+                    self.player.sprite.get_damaged()
+
 
     def get_player_score(self):
         return self.player.sprite.score
+    
+
+    def get_player_health(self):
+        return self.player.sprite.health
+
+
+    def check_fall(self):
+        if self.player.sprite.rect.y >= 800:
+            self.player.sprite.health = 0
+
+
+    def enemy_movement(self):
+        for enemy in self.enemies.sprites():
+            for barrier in self.barriers.sprites():
+                if enemy.rect.colliderect(barrier):
+                    enemy.reverse()
 
 
     def generate(self):
         #Level
         self.tiles.update(self.world_move)
         self.tiles.draw(self.display_surface)
+        self.barriers.update(self.world_move)
+        self.barriers.draw(self.display_surface)
         self.coins.update(self.world_move)
         self.coins.draw(self.display_surface)
-        self.enemy.update(self.world_move)
-        self.enemy.draw(self.display_surface)
+        self.goal.update(self.world_move)
+        self.goal.draw(self.display_surface)
+        self.enemies.update(self.world_move)
+        self.enemy_movement()
+        self.enemies.draw(self.display_surface)
+        self.explosion_sprites.update(self.world_move)
+        self.explosion_sprites.draw(self.display_surface)
         self.move_camera()
 
         #Player
@@ -134,3 +198,5 @@ class Level():
         self.coin_collision()
         self.player.update()
         self.player.draw(self.display_surface)
+        self.enemy_collision()
+        self.check_fall()
