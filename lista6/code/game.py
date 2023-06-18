@@ -73,7 +73,7 @@ class GameState():
                 pygame.quit()         
                 exit()
         
-        screen.fill("grey")
+        screen.fill("dark grey")
         if new_game_button.draw(screen):
             self.level_number = 0
             self.score = 0
@@ -157,7 +157,7 @@ class GameState():
                 pygame.quit()         
                 exit()
         
-        screen.fill("grey")
+        screen.fill("dark grey")
         self.display_highscores()
         if back_button.draw(screen):
             self.state = "main_menu"
@@ -171,7 +171,7 @@ class GameState():
                 pygame.quit()         
                 exit()
         
-        screen.fill("grey")
+        screen.fill("dark grey")
         self.display_rules()
         if back_button.draw(screen):
             self.state = "main_menu"
@@ -185,7 +185,7 @@ class GameState():
                 pygame.quit()         
                 exit()
         
-        screen.fill("grey")
+        screen.fill("dark grey")
         self.display_about()
         if back_button.draw(screen):
             self.state = "main_menu"
@@ -194,7 +194,7 @@ class GameState():
     def paused(self):
         """Handle the paused state."""
 
-        screen.fill("gray")
+        screen.fill("dark gray")
         if resume_button.draw(screen):
             self.is_paused = False
         elif quit_button.draw(screen):
